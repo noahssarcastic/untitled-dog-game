@@ -2,17 +2,8 @@ using UnityEngine;
 
 public class Respawn : MonoBehaviour
 {
-    public delegate void RespawnHandler();
-    public RespawnHandler respawn;
-
-    void Start()
+    public void ResetPosition()
     {
-        if (respawn == null)
-            respawn = DefaultRespawn;
-    }
-
-    private void DefaultRespawn()
-    {
-        Debug.Log("Respawn behavior not set.");
+        transform.position = Vector3.zero;
     }
 }

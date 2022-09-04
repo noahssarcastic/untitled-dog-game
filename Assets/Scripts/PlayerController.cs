@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,22 +15,12 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     private Vector2 movement;
     private bool isMoving;
-    private UnityEvent respawnEvent;
 
     void Awake()
     {
-        GetComponent<Respawn>().respawn = Respawn;
         playerRigidbody = GetComponent<Rigidbody2D>();
         playerCollider = transform.GetComponent<BoxCollider2D>();
         defaultGravity = playerRigidbody.gravityScale;
-    }
-
-    void Start()
-    {
-        if (respawnEvent == null)
-            respawnEvent = new UnityEvent();
-
-        respawnEvent.AddListener(Respawn);
     }
 
     void Update()
@@ -109,10 +98,5 @@ public class PlayerController : MonoBehaviour
             0f,
             LayerMask.GetMask("Ground"));
         return hit != null;
-    }
-
-    private void Respawn()
-    {
-        transform.position = Vector3.zero;
     }
 }

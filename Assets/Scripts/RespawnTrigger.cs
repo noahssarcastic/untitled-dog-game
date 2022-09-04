@@ -4,6 +4,6 @@ public class RespawnTrigger : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D collider)
     {
-        collider.gameObject.GetComponent<Respawn>().respawn();
+        collider.gameObject.GetComponent<Respawn>().ResetPosition();
     }
 }
