@@ -2,11 +2,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Range(0, .3f)][SerializeField] private float m_MovementSmoothing = .05f;
+    [Range(0, .3f)][SerializeField] private float smoothTime = .05f;
+    [SerializeField] private float maxVelocity = 10f;
 
-    private Vector2 velocity = Vector3.zero;
     private Rigidbody2D playerRigidbody;
-    private Vector2 movement;
+    private float horizontalInput;
+    private Vector2 smoothDampRef = Vector2.zero; // required for SmoothDamp to work
 
 
     void Awake()
@@ -18,18 +19,17 @@ public class PlayerController : MonoBehaviour
     {
         UpdateInput();
         Move();
-        Debug.Log(velocity);
     }
 
     private void UpdateInput()
     {
-        Vector2 input = new Vector2(Input.GetAxis("Horizontal"), 0f);
-        movement = input;
+        horizontalInput = Input.GetAxis("Horizontal");
     }
 
     private void Move()
     {
-        Vector3 targetVelocity = new Vector2(movement.x * 10f, playerRigidbody.velocity.y);
-        playerRigidbody.velocity = Vector2.SmoothDamp(playerRigidbody.velocity, targetVelocity, ref velocity, m_MovementSmoothing);
+        Vector2 currentVelocity = playerRigidbody.velocity;
+        Vector2 targetVelocity = new Vector2(horizontalInput * maxVelocity, currentVelocity.y);
+        playerRigidbody.velocity = Vector2.SmoothDamp(currentVelocity, targetVelocity, ref smoothDampRef, smoothTime);
     }
 }
