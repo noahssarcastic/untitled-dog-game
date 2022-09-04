@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using UnityEditor;
 
 public class NavGrid : MonoBehaviour
 {
@@ -63,8 +64,10 @@ public class NavGrid : MonoBehaviour
 
     public void DrawTileGizmo(Vector3 place, Color color)
     {
-        Gizmos.color = color;
-        Gizmos.DrawSphere(place + cellSizeOffset, 0.2f);
+        // Gizmos.color = color;
+        // Gizmos.DrawSphere(place + cellSizeOffset, 0.2f);
+        Handles.color = color;
+        Handles.DrawWireDisc(place + cellSizeOffset, Vector3.forward, 0.2f, 5f);
     }
 
     public void DrawAllTiles()

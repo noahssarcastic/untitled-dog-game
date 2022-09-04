@@ -48,8 +48,7 @@
     "ProjectSettings/": true,
     "temp/": true,
     "Temp/": true,
-    "**/*.sln": true,
-    "*.csproj": true
+    "**/*.sln": true
   },
   "cSpell.words": ["CCBY", "Iniguez", "Lerp", "Respawn", "Rigidbody", "Tilemap"]
 }
