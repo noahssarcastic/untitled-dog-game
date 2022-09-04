@@ -17,7 +17,7 @@ public class NavGrid : MonoBehaviour
         GetTiles();
     }
 
-    void OnDrawGizmos()
+    void OnDrawGizmosSelected()
     {
         if (tiles != null)
             DrawAllTiles();

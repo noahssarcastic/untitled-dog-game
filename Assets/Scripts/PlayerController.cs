@@ -17,11 +17,8 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         UpdateInput();
-    }
-
-    void FixedUpdate()
-    {
         Move();
+        Debug.Log(velocity);
     }
 
     private void UpdateInput()

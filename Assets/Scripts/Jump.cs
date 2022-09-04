@@ -7,7 +7,7 @@ public class Jump : MonoBehaviour
     [SerializeField] private float fallMultiplier = 2.5f;
     [SerializeField] private float lowJumpMultiplier = 2f;
 
-    private BoxCollider2D playerCollider;
+    private Collider2D playerCollider;
     private Rigidbody2D playerRigidbody;
     private float defaultGravity;
     private bool isGrounded;
@@ -15,7 +15,7 @@ public class Jump : MonoBehaviour
     void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
-        playerCollider = transform.GetComponent<BoxCollider2D>();
+        playerCollider = transform.GetComponent<Collider2D>();
         defaultGravity = playerRigidbody.gravityScale;
     }
 
@@ -46,6 +46,21 @@ public class Jump : MonoBehaviour
         }
     }
 
+    void OnDrawGizmosSelected()
+    {
+        float boxWidth = playerCollider.bounds.size.x;
+        float boxHeight = groundCheckDepth;
+        Gizmos.color = isGrounded ? Color.green : Color.grey;
+        Vector3 p1 = playerCollider.bounds.min;
+        Vector3 p2 = p1 + Vector3.right * boxWidth;
+        Vector3 p3 = p2 + Vector3.down * boxHeight;
+        Vector3 p4 = p1 + Vector3.down * boxHeight;
+        Gizmos.DrawLine(p1, p2);
+        Gizmos.DrawLine(p2, p3);
+        Gizmos.DrawLine(p3, p4);
+        Gizmos.DrawLine(p4, p1);
+    }
+
     private void UpdateInput()
     {
         // Update ground check
@@ -72,4 +87,6 @@ public class Jump : MonoBehaviour
             LayerMask.GetMask("Ground"));
         return hit != null;
     }
+
+
 }
