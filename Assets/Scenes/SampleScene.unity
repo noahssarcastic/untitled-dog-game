@@ -133,11 +133,13 @@ GameObject:
   m_Component:
   - component: {fileID: 513622944}
   - component: {fileID: 513622943}
-  - component: {fileID: 513622945}
-  - component: {fileID: 513622946}
-  - component: {fileID: 513622947}
+  - component: {fileID: 513622951}
   - component: {fileID: 513622948}
   - component: {fileID: 513622949}
+  - component: {fileID: 513622946}
+  - component: {fileID: 513622950}
+  - component: {fileID: 513622947}
+  - component: {fileID: 513622952}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -183,32 +185,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &513622945
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 513622942}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!114 &513622946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,16 +192,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 513622942}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7cfc0b4b30ccf594eb515b90cd507fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  groundCheckDepth: 0.1
-  jumpMultiplier: 300
-  fallMultiplier: 2.5
-  lowJumpMultiplier: 2
-  m_MovementSmoothing: 0.05
+  smoothTime: 0.1
+  maxVelocity: 10
 --- !u!114 &513622947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +256,51 @@ MonoBehaviour:
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
   m_CursorLockBehavior: 0
+--- !u!114 &513622950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513622942}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5267503cb0d2974db7984c22f49ad0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundCheckDepth: 0.1
+  jumpMultiplier: 500
+  fallMultiplier: 2.5
+  lowJumpMultiplier: 2
+--- !u!70 &513622951
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513622942}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: f7bc7966e9f38054aa223a0d1c598896, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 1}
+  m_Direction: 0
+--- !u!114 &513622952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 513622942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a4ba4675b4f1e94a8622b5a55bd7d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHeight: 10
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
