@@ -48,6 +48,13 @@ public class Jump : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
+        DrawGroundCheck();
+    }
+
+    private void DrawGroundCheck()
+    {
+        if (playerCollider == null) return;
+
         float boxWidth = playerCollider.bounds.size.x;
         float boxHeight = groundCheckDepth;
         Gizmos.color = isGrounded ? Color.green : Color.grey;
