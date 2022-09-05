@@ -8,6 +8,9 @@ public class NavGrid : MonoBehaviour
 
     private NavNode[,] tiles;
     private Vector3 cellSizeOffset;
+    private Vector3Int leftClickedCell;
+    private Vector3Int rightClickedCell;
+
 
     void Start()
     {
@@ -15,6 +18,21 @@ public class NavGrid : MonoBehaviour
         tilemap.CompressBounds();
         cellSizeOffset = gameObject.GetComponent<Grid>().cellSize * 0.5f;
         GetTiles();
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Vector3 clickCoords = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            leftClickedCell = tilemap.WorldToCell(clickCoords) - tilemap.cellBounds.min;
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            Vector3 clickCoords = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            rightClickedCell = tilemap.WorldToCell(clickCoords) - tilemap.cellBounds.min;
+        }
     }
 
     void OnDrawGizmosSelected()
@@ -64,10 +82,8 @@ public class NavGrid : MonoBehaviour
 
     public void DrawTileGizmo(Vector3 place, Color color)
     {
-        // Gizmos.color = color;
-        // Gizmos.DrawSphere(place + cellSizeOffset, 0.2f);
         Handles.color = color;
-        Handles.DrawWireDisc(place + cellSizeOffset, Vector3.forward, 0.2f, 5f);
+        Handles.DrawSolidDisc(place + cellSizeOffset, Vector3.forward, 0.2f);
     }
 
     public void DrawAllTiles()
@@ -78,9 +94,20 @@ public class NavGrid : MonoBehaviour
             {
                 NavNode tile = tiles[x, y];
                 if (tile == null) continue;
+
+                Color nodeColor = Color.gray;
+                if (leftClickedCell.x == x && leftClickedCell.y == y)
+                {
+                    nodeColor = Color.green;
+                }
+                else if (rightClickedCell.x == x && rightClickedCell.y == y)
+                {
+                    nodeColor = Color.red;
+                }
+
                 if (tile.Type == NavNodeType.TRAVERSABLE)
                 {
-                    DrawTileGizmo(tile.Position, Color.green);
+                    DrawTileGizmo(tile.Position, nodeColor);
                 }
             }
         }
