@@ -38,15 +38,13 @@ public class NavGrid : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         if (tiles != null)
-            DrawAllTiles();
+            DrawAllNodes();
     }
 
     public void GetTiles()
     {
         if (tiles == null)
-        {
             tiles = new NavNode[tilemap.cellBounds.size.x, tilemap.cellBounds.size.y];
-        }
 
         for (int x = tilemap.cellBounds.xMin; x < tilemap.cellBounds.xMax; x++)
         {
@@ -73,20 +71,18 @@ public class NavGrid : MonoBehaviour
                 NavNode tile = tiles[x, y];
                 NavNode aboveTile = tiles[x, y + 1];
                 if (aboveTile.Type != NavNodeType.EMPTY)
-                {
                     tile.Type = NavNodeType.INACCESSIBLE;
-                }
             }
         }
     }
 
-    public void DrawTileGizmo(Vector3 place, Color color)
+    public void DrawNodeGizmo(Vector3 place, Color color)
     {
         Handles.color = color;
         Handles.DrawSolidDisc(place + cellSizeOffset, Vector3.forward, 0.2f);
     }
 
-    public void DrawAllTiles()
+    public void DrawAllNodes()
     {
         for (int x = 0; x < tiles.GetLength(0); x++)
         {
@@ -94,22 +90,19 @@ public class NavGrid : MonoBehaviour
             {
                 NavNode tile = tiles[x, y];
                 if (tile == null) continue;
-
-                Color nodeColor = Color.gray;
-                if (leftClickedCell.x == x && leftClickedCell.y == y)
-                {
-                    nodeColor = Color.green;
-                }
-                else if (rightClickedCell.x == x && rightClickedCell.y == y)
-                {
-                    nodeColor = Color.red;
-                }
-
                 if (tile.Type == NavNodeType.TRAVERSABLE)
-                {
-                    DrawTileGizmo(tile.Position, nodeColor);
-                }
+                    DrawNodeGizmo(tile.Position, GetNodeColor(x, y));
             }
         }
+    }
+
+    private Color GetNodeColor(int x, int y)
+    {
+        if (leftClickedCell.x == x && leftClickedCell.y == y)
+            return Color.green;
+        else if (rightClickedCell.x == x && rightClickedCell.y == y)
+            return Color.red;
+        else
+            return Color.grey;
     }
 }
