@@ -50,5 +50,14 @@
     "Temp/": true,
     "**/*.sln": true
   },
-  "cSpell.words": ["CCBY", "Iniguez", "Lerp", "Respawn", "Rigidbody", "Tilemap"]
+  "cSpell.words": [
+    "CCBY",
+    "Iniguez",
+    "Lerp",
+    "listheader",
+    "pathfinding",
+    "Respawn",
+    "Rigidbody",
+    "Tilemap"
+  ]
 }
