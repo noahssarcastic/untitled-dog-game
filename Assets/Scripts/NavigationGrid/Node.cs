@@ -31,31 +31,16 @@ namespace NavigationGrid
     }
 
     /// <summary>
-    /// Represents a Node's two-part index in a Grid.
-    /// </summary>
-    public struct NodeIndex
-    {
-        public NodeIndex(int _x, int _y)
-        {
-            x = _x;
-            y = _y;
-        }
-
-        public readonly int x;
-        public readonly int y;
-    }
-
-    /// <summary>
     /// Models a node in a NavigationGrid system.
     /// </summary>
     public class Node
     {
-        public Node(NodeType _type, Vector3 _position, NodeIndex _index)
+        public Node(NodeType _type, Vector3 _position, Vector2Int _index)
         {
             type = _type;
             position = _position;
             index = _index;
-            adjacencies = new List<NodeIndex>();
+            adjacencies = new List<Vector2Int>();
         }
 
         /// <summary>
@@ -71,11 +56,11 @@ namespace NavigationGrid
         /// <summary>
         /// The node's two-part Grid index.
         /// </summary>
-        public NodeIndex index;
+        public Vector2Int index;
 
         /// <summary>
         /// A list of all adjacent nodes' NodeIndex.
         /// </summary>
-        public List<NodeIndex> adjacencies;
+        public List<Vector2Int> adjacencies;
     }
 }
